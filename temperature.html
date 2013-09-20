@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Temperature</title>
+    <style>
+        body, div, ul, li, img {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        body {
+            background: #c1d4e6;
+            font: 18px/24px sans-serif;
+            text-align: center;
+        }
+
+        nav ul {
+            background: linear-gradient(to bottom, #efefef 0%, #bbbbbb 100%);
+            box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
+            padding: 0 20px;
+            border-radius: 10px;
+            list-style: none;
+            position: relative;
+            display: inline-table;
+        }
+
+            nav ul li {
+                float: left;
+            }
+
+                nav ul li:hover {
+                    background: linear-gradient(to bottom, #4f5964 0%, #5f6975 40%);
+                }
+
+                    nav ul li:hover a {
+                        color: #fff;
+                    }
+
+                nav ul li a {
+                    display: block;
+                    padding: 25px 40px;
+                    color: #757575;
+                    text-decoration: none;
+                }
+    </style>
+    <script>
+        function refresh() {
+            var graph = document.getElementById("graph");
+            graph.src = graph.dataset.src + '#' + new Date().getTime();
+        }
+
+        function onload() {
+            var handler = function (event) {
+                document.getElementById("graph").dataset.src = event.target.dataset.src;
+                refresh();
+            };
+
+            var current = window.location.hash;
+            if (current === "") {
+                current = "daily";
+            }
+            else {
+                current = current.substring(1);
+            }
+
+            var links = document.getElementById("nav").getElementsByTagName("a");
+            for (var i = 0; i < links.length; i++) {
+                links[i].addEventListener("click", handler);
+            }
+
+            document.getElementById("graph").dataset.src = current + ".png";
+
+            window.setInterval(refresh, 30000);
+            refresh();
+        }
+
+        window.addEventListener("load", onload);
+    </script>
+</head>
+<body>
+    <nav id="nav">
+        <ul>
+            <li><a data-src="hourly.png" href="#hourly">Hourly</a></li>
+            <li><a data-src="daily.png" href="#daily">Daily</a></li>
+            <li><a data-src="weekly.png" href="#weekly">Weekly</a></li>
+        </ul>
+    </nav>
+    <article>
+        <img id="graph" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAIC‌​RAEAOw==" />
+    </article>
+</body>
+</html>
