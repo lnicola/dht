@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 	return 3;
   }
 
-  for (int c = 0; c < 5; c++)
+  for (int c = 0; c < 2; c++)
   {
       if (take_reading(dhtpin))
           return 0;
@@ -123,4 +123,5 @@ int readDHT(int pin, float *temperature, float *humidity) {
   }
 
   return 0;
-} 
+}
+
