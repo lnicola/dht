@@ -10,5 +10,5 @@ do
         sed -i "s/<div id=\"data\">.*<\/div>/<div id=\"data\">${FOO[0]} °C ${FOO[1]}%<\/div>/" temperature.html
     fi
 
-    sleep 5
+    sleep 30
 done
