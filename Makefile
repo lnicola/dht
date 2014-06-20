@@ -11,4 +11,4 @@ dht: $(SRC)
 	        $(CC) -o $@ $(SRC) $(CFLAGS) $(LDFLAGS)
 
 clean:
-	        rm -f dht 
+	        rm -f dht
